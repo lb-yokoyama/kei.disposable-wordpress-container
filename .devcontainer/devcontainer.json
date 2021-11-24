@@ -1,0 +1,16 @@
+{
+	"name": "Disposable WordPress Container",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "wordpress",
+	"workspaceFolder": "/var/www/html",
+	"shutdownAction": "none",
+	"extensions": [
+		"biati.wordpress-debug-mode",
+		"johnbillion.vscode-wordpress-hooks",
+		"wordpresstoolbox.wordpress-toolbox",
+		"felixfbecker.php-debug",
+		"mehedidracula.php-namespace-resolver",
+		"tabnine.tabnine-vscode",
+		"visualstudioexptteam.vscodeintellicode"
+	]
+}
