@@ -1,4 +1,4 @@
-# ignoree core
+# ignore core
 wp-includes
 # ignore everything in the root except the "wp-content" directory.
 ./*
