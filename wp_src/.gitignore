@@ -14,9 +14,8 @@ wp-includes
 # ignore these plugins
 wp-content/plugins/hello.php
 
-# ignore node dependency directories
+# ignore dependency directories
 node_modules/
-
 # ignore log files and databases
 *.log
 *.sql

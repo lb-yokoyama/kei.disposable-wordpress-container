@@ -2,12 +2,13 @@ version: '3.1'
 
 services:
   wordpress:
-      image: wordpress
+      build:
+        context: .
+        dockerfile: cent_wp.Dockerfile
       restart: unless-stopped
       ports:
         - 8080:80
       environment:
-        HOSTNAME: wp
         WORDPRESS_DB_HOST: db
         WORDPRESS_DB_NAME: wordpress_db
         WORDPRESS_DB_USER: user
@@ -15,6 +16,7 @@ services:
         WORDPRESS_DEBUG: true
         WORDPRESS_DEBUG_LOG: true
         WORDPRESS_DEBUG_DISPLAY: false
+        TZ: Asia/Tokyo
       volumes:
         - ../wp_src:/var/www/html
   db:
@@ -25,6 +27,7 @@ services:
         MYSQL_USER: user
         MYSQL_PASSWORD: pass
         MYSQL_RANDOM_ROOT_PASSWORD: '1'
+        TZ: Asia/Tokyo
       volumes:
         - db:/var/lib/mysql
   # https-portal:
