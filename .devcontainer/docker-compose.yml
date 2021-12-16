@@ -13,6 +13,7 @@ services:
         WORDPRESS_DB_PASSWORD: pass
       volumes:
         - wordpress:/var/www/html
+        - common:/usr/common
   db:
       image: mysql:5.7
       restart: unless-stopped
@@ -23,6 +24,8 @@ services:
         MYSQL_RANDOM_ROOT_PASSWORD: '1'
       volumes:
         - db:/var/lib/mysql
+        - common:/usr/common
 volumes:
     wordpress:
     db:
+    common:
