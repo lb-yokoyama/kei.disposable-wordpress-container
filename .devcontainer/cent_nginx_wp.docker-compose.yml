@@ -2,14 +2,13 @@ version: '3.1'
 
 services:
   wordpress:
-      image: wordpress
+      build:
+        context: .
+        dockerfile: cent_wp.Dockerfile
       restart: unless-stopped
-      working_dir: '/var/www/html'
       ports:
         - 8080:80
       environment:
-        HOSTNAME: 'wp'
-        TZ: 'Asia/Tokyo'
         WORDPRESS_DB_HOST: db
         WORDPRESS_DB_NAME: wordpress_db
         WORDPRESS_DB_USER: user
@@ -17,20 +16,19 @@ services:
         WORDPRESS_DEBUG: 'true'
         WORDPRESS_DEBUG_LOG: 'true'
         WORDPRESS_DEBUG_DISPLAY: 'false'
+        TZ: Asia/Tokyo
       volumes:
-        - ../wp_src:/var/www/html
+        - ../wp_src:/var/www/data
   db:
       image: mysql:5.7
       restart: unless-stopped
       environment:
-        TZ: 'Asia/Tokyo'
         MYSQL_DATABASE: wordpress_db
         MYSQL_USER: user
         MYSQL_PASSWORD: pass
         MYSQL_RANDOM_ROOT_PASSWORD: '1'
+        TZ: Asia/Tokyo
       volumes:
         - db:/var/lib/mysql
-        - common:/usr/common
 volumes:
     db:
-    common:
