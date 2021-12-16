@@ -13,12 +13,12 @@ services:
         WORDPRESS_DB_NAME: wordpress_db
         WORDPRESS_DB_USER: user
         WORDPRESS_DB_PASSWORD: pass
-        WORDPRESS_DEBUG: true
-        WORDPRESS_DEBUG_LOG: true
-        WORDPRESS_DEBUG_DISPLAY: false
+        WORDPRESS_DEBUG: 'true'
+        WORDPRESS_DEBUG_LOG: 'true'
+        WORDPRESS_DEBUG_DISPLAY: 'false'
         TZ: Asia/Tokyo
       volumes:
-        - ../wp_src:/var/www/html
+        - ../wp_src:/var/www/data
   db:
       image: mysql:5.7
       restart: unless-stopped
@@ -30,21 +30,5 @@ services:
         TZ: Asia/Tokyo
       volumes:
         - db:/var/lib/mysql
-  # https-portal:
-  #     image: steveltn/https-portal:1
-  #     container_name: https_portal
-  #     ports:
-  #       - 180:80
-  #       - 443:443
-  #     tty: true
-  #     restart: always
-  #     links:
-  #       - wordpress
-  #     volumes:
-  #       - ../cert:/var/lib/https-portal
-  #     environment:
-  #       STAGE: local
-  #       DOMAINS: '127.0.0.1 -> https://wordpress:8080'
-        # see. https://www.netassist.ne.jp/techblog/13744/
 volumes:
     db:

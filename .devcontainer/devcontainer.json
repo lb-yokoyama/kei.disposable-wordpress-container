@@ -2,15 +2,20 @@
 	"name": "Disposable WordPress Container",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "wordpress",
-	"workspaceFolder": "/var/www/html",
-	"shutdownAction": "none",
+	"workspaceFolder": "/var/www",
+	"shutdownAction": "stopContainer",
+	"overrideCommand":false,
 	"extensions": [
+		"bmewburn.vscode-intelephense-client",
+		"mehedidracula.php-namespace-resolver",
+		"felixfbecker.php-debug",
 		"biati.wordpress-debug-mode",
 		"johnbillion.vscode-wordpress-hooks",
 		"wordpresstoolbox.wordpress-toolbox",
-		"felixfbecker.php-debug",
-		"mehedidracula.php-namespace-resolver",
-		"tabnine.tabnine-vscode",
-		"visualstudioexptteam.vscodeintellicode"
+		"formulahendry.auto-rename-tag",
+		"william-voyek.vscode-nginx",
+		"ahmadalli.vscode-nginx-conf",
+		"mrmlnc.vscode-apache",
+		"xinyayang0506.log-analysis"
 	]
 }
