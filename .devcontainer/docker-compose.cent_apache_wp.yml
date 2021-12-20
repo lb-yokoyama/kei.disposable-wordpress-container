@@ -1,11 +1,13 @@
-version: '3.1'
+version: '3.9'
 
 services:
   wordpress:
       build:
         context: .
-        dockerfile: cent_wp.Dockerfile
-      restart: unless-stopped
+        dockerfile: cent_apache_wp.Dockerfile
+      container_name: wp_app
+      restart: 'unless-stopped'
+      tty: true
       ports:
         - 8080:80
       environment:
@@ -18,10 +20,13 @@ services:
         WORDPRESS_DEBUG_DISPLAY: 'false'
         TZ: Asia/Tokyo
       volumes:
-        - ../wp_src:/var/www/data
+        - ../src:/var/www/html
+      networks:
+        - wordpress
   db:
       image: mysql:5.7
-      restart: unless-stopped
+      container_name: wp_db
+      restart: 'unless-stopped'
       environment:
         MYSQL_DATABASE: wordpress_db
         MYSQL_USER: user
@@ -29,6 +34,12 @@ services:
         MYSQL_RANDOM_ROOT_PASSWORD: '1'
         TZ: Asia/Tokyo
       volumes:
-        - db:/var/lib/mysql
+        - wp_db_data:/var/lib/mysql
+        - ../db:/usr/tmp/db
+      networks:
+        - wordpress
 volumes:
-    db:
+  wp_db_data:
+networks:
+  wordpress:
+    driver: bridge

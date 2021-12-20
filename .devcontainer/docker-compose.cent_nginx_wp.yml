@@ -4,7 +4,8 @@ services:
   wordpress:
       build:
         context: .
-        dockerfile: cent_apache_wp.Dockerfile
+        dockerfile: cent_nginx_wp.Dockerfile
+      container_name: app_wordpress
       restart: unless-stopped
       ports:
         - 8080:80
@@ -18,9 +19,10 @@ services:
         WORDPRESS_DEBUG_DISPLAY: 'false'
         TZ: Asia/Tokyo
       volumes:
-        - ../wp_src:/var/www/html
+        - ../wp_src:/var/www/data
   db:
       image: mysql:5.7
+      container_name: db_mysql
       restart: unless-stopped
       environment:
         MYSQL_DATABASE: wordpress_db

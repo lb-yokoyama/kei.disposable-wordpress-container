@@ -1,10 +1,10 @@
 {
 	"name": "Disposable WordPress Container",
-	"dockerComposeFile": "docker-compose.yml",
+	"dockerComposeFile": "docker-compose.cent_apache_wp.yml",
 	"service": "wordpress",
-	"workspaceFolder": "/var/www",
+	"workspaceFolder": "/var/www/html",
 	"shutdownAction": "stopContainer",
-	"overrideCommand":false,
+  "overrideCommand": true,
 	"extensions": [
 		"bmewburn.vscode-intelephense-client",
 		"mehedidracula.php-namespace-resolver",
