@@ -35,7 +35,7 @@ services:
         TZ: Asia/Tokyo
       volumes:
         - wp_db_data:/var/lib/mysql
-        - ../db:/usr/tmp/db
+        - ../sql:/usr/tmp/sql
       networks:
         - wordpress
 volumes:
