@@ -6,7 +6,7 @@ services:
         context: .
         dockerfile: cent_apache_wp.Dockerfile
       container_name: wp_app
-      restart: 'unless-stopped'
+      restart: unless-stopped
       tty: true
       ports:
         - 8080:80
@@ -21,12 +21,13 @@ services:
         TZ: Asia/Tokyo
       volumes:
         - ../src:/var/www/html
+        - cent_group:/sys/fs/cgroup
       networks:
-        - wordpress
+        - wp_net
   db:
       image: mysql:5.7
       container_name: wp_db
-      restart: 'unless-stopped'
+      restart: unless-stopped
       environment:
         MYSQL_DATABASE: wordpress_db
         MYSQL_USER: user
@@ -37,9 +38,10 @@ services:
         - wp_db_data:/var/lib/mysql
         - ../sql:/usr/tmp/sql
       networks:
-        - wordpress
+        - wp_net
 volumes:
   wp_db_data:
+  cent_group:
 networks:
-  wordpress:
+  wp_net:
     driver: bridge

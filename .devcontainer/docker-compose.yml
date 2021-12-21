@@ -1,36 +1,37 @@
-version: '3.9'
+version: "3.9"
 
 services:
   wp_app:
-      image: wordpress
-      container_name: wp_app
-      restart: unless-stopped
-      working_dir: '/var/www/html'
-      ports:
-        - 8080:80
-      environment:
-        HOSTNAME: 'wp'
-        TZ: 'Asia/Tokyo'
-        WORDPRESS_DB_HOST: db
-        WORDPRESS_DB_NAME: wordpress_db
-        WORDPRESS_DB_USER: user
-        WORDPRESS_DB_PASSWORD: pass
-        WORDPRESS_DEBUG: 'true'
-        WORDPRESS_DEBUG_LOG: 'true'
-        WORDPRESS_DEBUG_DISPLAY: 'false'
-      volumes:
-        - ../wp_src:/var/www/html
+    image: wordpress
+    container_name: wp_app
+    restart: unless-stopped
+    working_dir: "/var/www/html"
+    ports:
+      - 8080:80
+    tty: true
+    environment:
+      HOSTNAME: "wp"
+      TZ: "Asia/Tokyo"
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress_db
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_PASSWORD: pass
+      WORDPRESS_DEBUG: "true"
+      WORDPRESS_DEBUG_LOG: "true"
+      WORDPRESS_DEBUG_DISPLAY: "false"
+    volumes:
+      - ../wp_src:/var/www/html
   db:
-      image: mysql:5.7
-      container_name: db_mysql
-      restart: unless-stopped
-      environment:
-        TZ: 'Asia/Tokyo'
-        MYSQL_DATABASE: wordpress_db
-        MYSQL_USER: user
-        MYSQL_PASSWORD: pass
-        MYSQL_RANDOM_ROOT_PASSWORD: '1'
-      volumes:
-        - db:/var/lib/mysql
+    image: mysql:5.7
+    container_name: db_mysql
+    restart: unless-stopped
+    environment:
+      TZ: "Asia/Tokyo"
+      MYSQL_DATABASE: wordpress_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_RANDOM_ROOT_PASSWORD: "1"
+    volumes:
+      - db:/var/lib/mysql
 volumes:
-    db:
+  db:

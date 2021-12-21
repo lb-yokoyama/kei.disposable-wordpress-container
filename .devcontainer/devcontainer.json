@@ -6,10 +6,7 @@
 	"shutdownAction": "stopContainer",
   "overrideCommand": true,
 	"extensions": [
-		"bmewburn.vscode-intelephense-client",
 		"mehedidracula.php-namespace-resolver",
-		"felixfbecker.php-debug",
-		"biati.wordpress-debug-mode",
 		"johnbillion.vscode-wordpress-hooks",
 		"wordpresstoolbox.wordpress-toolbox",
 		"formulahendry.auto-rename-tag",
