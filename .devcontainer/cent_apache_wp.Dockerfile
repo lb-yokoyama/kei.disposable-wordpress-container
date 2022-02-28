@@ -12,6 +12,7 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
   rm -f /lib/systemd/system/basic.target.wants/*;\
   rm -f /lib/systemd/system/anaconda.target.wants/*; \
   mkdir -p /var/www/html;
+#VOLUME [ "/sys/fs/cgroup" ]
 RUN /usr/sbin/init & \
   yum install -y https://rpms.remirepo.net/enterprise/remi-release-7.rpm; \
   yum update -y \
@@ -23,10 +24,11 @@ RUN /usr/sbin/init & \
   && chown -R apache:apache /var/www/html \
   && chmod -R 770 /var/www/html \
   && echo 'ServerName localhost:80'>>/etc/httpd/conf/httpd.conf \
-  && echo 'NameVirtualHost *:80' >> /etc/httpd/conf/httpd.conf \
   && mv /usr/tmpl/apache.conf /etc/httpd/conf.d/wp.conf \
   && rm -fr /usr/tmpl
 # && echo 'alias php=php81'>> ~/.bashrc \
-# && sed 's/#NameVirtualHost *:80/NameVirtualHost *:80/' /etc/httpd/conf/httpd.conf>/etc/httpd/conf/httpd.conf \
-CMD ["/usr/sbin/init"]
-ENTRYPOINT ["httpd", "-k", "start"]
+
+#CMD ["systemctl","start","httpd.service"]
+#ENTRYPOINT ["httpd","-k=start"]
+#ENTRYPOINT /usr/sbin/init
+ENTRYPOINT ["systemctl","start","httpd.service"]

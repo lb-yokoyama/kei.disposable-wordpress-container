@@ -19,9 +19,10 @@ services:
         WORDPRESS_DEBUG_LOG: 'true'
         WORDPRESS_DEBUG_DISPLAY: 'false'
         TZ: Asia/Tokyo
+      depends_on:
+        - db
       volumes:
         - ../src:/var/www/html
-        - cent_group:/sys/fs/cgroup
       networks:
         - wp_net
   db:
@@ -32,7 +33,7 @@ services:
         MYSQL_DATABASE: wordpress_db
         MYSQL_USER: user
         MYSQL_PASSWORD: pass
-        MYSQL_RANDOM_ROOT_PASSWORD: '1'
+        MYSQL_ROOT_PASSWORD: pass
         TZ: Asia/Tokyo
       volumes:
         - wp_db_data:/var/lib/mysql
@@ -41,7 +42,6 @@ services:
         - wp_net
 volumes:
   wp_db_data:
-  cent_group:
 networks:
   wp_net:
     driver: bridge
